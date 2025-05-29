@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Github, Linkedin, Mail, Download, ExternalLink, Menu, X, ChevronDown } from 'lucide-react';
@@ -23,6 +22,51 @@ const Index = () => {
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark);
   }, [isDark]);
+
+  const handleDownloadCV = () => {
+    // Create a sample CV content (in a real scenario, you'd have an actual PDF file)
+    const cvContent = `
+    AI ENGINEER & DATA SCIENTIST
+    
+    CONTACT INFORMATION
+    Email: contact@aienginer.com
+    GitHub: github.com/profile
+    LinkedIn: linkedin.com/in/profile
+    
+    SUMMARY
+    Passionate AI Engineer and Data Scientist with over 5 years of experience in building intelligent systems and extracting insights from complex datasets.
+    
+    SKILLS
+    • Programming: Python, SQL, JavaScript
+    • AI/ML: TensorFlow, PyTorch, Scikit-learn
+    • Cloud: AWS, GCP, Azure
+    • Data Visualization: Tableau, D3.js, Matplotlib
+    • MLOps: Docker, Kubernetes, MLflow
+    
+    EXPERIENCE
+    Senior AI Engineer (2020-Present)
+    • Built ML pipelines for real-time analytics
+    • Developed NLP and computer vision models
+    • Led AI strategy and implementation
+    
+    EDUCATION
+    Master's in Data Science (2018)
+    Bachelor's in Computer Science (2016)
+    `;
+
+    // Create and download the CV as a text file
+    const blob = new Blob([cvContent], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'AI_Engineer_CV.txt';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+    
+    toast.success('CV downloaded successfully!');
+  };
 
   const skills = [
     { name: 'Python', level: 95, category: 'Programming' },
@@ -201,7 +245,7 @@ const Index = () => {
             >
               Hire Me
             </Button>
-            <Button size="lg" variant="outline">
+            <Button size="lg" variant="outline" onClick={handleDownloadCV}>
               <Download className="mr-2 h-4 w-4" />
               Download CV
             </Button>
