@@ -15,6 +15,7 @@ import AnimatedCounter from '@/components/AnimatedCounter';
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
+  const [activeSection, setActiveSection] = useState('');
   const { scrollY } = useScroll();
   const headerOpacity = useTransform(scrollY, [0, 100], [1, 0.95]);
   const heroY = useTransform(scrollY, [0, 500], [0, -150]);
@@ -23,43 +24,119 @@ const Index = () => {
     document.documentElement.classList.toggle('dark', isDark);
   }, [isDark]);
 
-  const handleDownloadCV = () => {
-    // Create a sample CV content (in a real scenario, you'd have an actual PDF file)
-    const cvContent = `
-    AI ENGINEER & DATA SCIENTIST
-    
-    CONTACT INFORMATION
-    Email: contact@aienginer.com
-    GitHub: github.com/profile
-    LinkedIn: linkedin.com/in/profile
-    
-    SUMMARY
-    Passionate AI Engineer and Data Scientist with over 5 years of experience in building intelligent systems and extracting insights from complex datasets.
-    
-    SKILLS
-    • Programming: Python, SQL, JavaScript
-    • AI/ML: TensorFlow, PyTorch, Scikit-learn
-    • Cloud: AWS, GCP, Azure
-    • Data Visualization: Tableau, D3.js, Matplotlib
-    • MLOps: Docker, Kubernetes, MLflow
-    
-    EXPERIENCE
-    Senior AI Engineer (2020-Present)
-    • Built ML pipelines for real-time analytics
-    • Developed NLP and computer vision models
-    • Led AI strategy and implementation
-    
-    EDUCATION
-    Master's in Data Science (2018)
-    Bachelor's in Computer Science (2016)
-    `;
+  // Track active section based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['about', 'skills', 'projects', 'services', 'contact'];
+      const scrollPosition = window.scrollY + 100;
 
-    // Create and download the CV as a text file
-    const blob = new Blob([cvContent], { type: 'text/plain' });
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+
+      // If we're at the top, no section is active
+      if (window.scrollY < 100) {
+        setActiveSection('');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleDownloadCV = () => {
+    // Create PDF content using jsPDF (in a real scenario, you'd have an actual PDF file)
+    const cvContent = `%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 5 0 R
+>>
+>>
+>>
+endobj
+
+4 0 obj
+<<
+/Length 200
+>>
+stream
+BT
+/F1 12 Tf
+50 700 Td
+(AI ENGINEER & DATA SCIENTIST) Tj
+0 -20 Td
+(Email: contact@aienginer.com) Tj
+0 -20 Td
+(GitHub: github.com/profile) Tj
+0 -20 Td
+(LinkedIn: linkedin.com/in/profile) Tj
+0 -40 Td
+(Passionate AI Engineer with 5+ years experience) Tj
+0 -20 Td
+(in building intelligent systems and data insights.) Tj
+ET
+endstream
+endobj
+
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000274 00000 n 
+0000000526 00000 n 
+trailer
+<<
+/Size 6
+/Root 1 0 R
+>>
+startxref
+593
+%%EOF`;
+
+    // Create and download the CV as a PDF file
+    const blob = new Blob([cvContent], { type: 'application/pdf' });
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'AI_Engineer_CV.txt';
+    link.download = 'AI_Engineer_CV.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -108,17 +185,23 @@ const Index = () => {
     {
       title: 'AI Model Training',
       description: 'Custom NLP, Computer Vision, and Machine Learning models tailored to your business needs.',
-      features: ['Data preprocessing', 'Model architecture design', 'Hyperparameter tuning', 'Performance optimization']
+      features: ['Data preprocessing', 'Model architecture design', 'Hyperparameter tuning', 'Performance optimization'],
+      price: '$2,500 - $15,000',
+      duration: '2-8 weeks'
     },
     {
       title: 'Data Visualization',
       description: 'Interactive dashboards and compelling visualizations that turn data into actionable insights.',
-      features: ['Dashboard development', 'Real-time analytics', 'Custom visualizations', 'Business intelligence']
+      features: ['Dashboard development', 'Real-time analytics', 'Custom visualizations', 'Business intelligence'],
+      price: '$1,500 - $8,000',
+      duration: '1-4 weeks'
     },
     {
       title: 'AI Consulting',
       description: 'Strategic guidance on AI implementation, MLOps, and data-driven decision making.',
-      features: ['Proof of concepts', 'Technical architecture', 'Best practices', 'Team training']
+      features: ['Proof of concepts', 'Technical architecture', 'Best practices', 'Team training'],
+      price: '$200 - $500/hour',
+      duration: 'Flexible'
     }
   ];
 
@@ -154,9 +237,21 @@ const Index = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="text-foreground/80 hover:text-foreground transition-colors capitalize"
+                className={`transition-colors capitalize relative ${
+                  activeSection === item 
+                    ? 'text-foreground font-medium' 
+                    : 'text-foreground/80 hover:text-foreground'
+                }`}
               >
                 {item}
+                {activeSection === item && (
+                  <motion.div
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-600"
+                    layoutId="activeIndicator"
+                    initial={false}
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </button>
             ))}
           </div>
@@ -195,7 +290,11 @@ const Index = () => {
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className="block w-full text-left text-foreground/80 hover:text-foreground transition-colors capitalize"
+                  className={`block w-full text-left transition-colors capitalize ${
+                    activeSection === item 
+                      ? 'text-foreground font-medium' 
+                      : 'text-foreground/80 hover:text-foreground'
+                  }`}
                 >
                   {item}
                 </button>
@@ -407,7 +506,11 @@ const Index = () => {
               >
                 <Card className="h-full hover:shadow-lg transition-shadow duration-300">
                   <CardHeader>
-                    <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
+                    <div className="flex justify-between items-start mb-2">
+                      <CardTitle className="text-xl">{service.title}</CardTitle>
+                      <Badge variant="secondary" className="ml-2">{service.duration}</Badge>
+                    </div>
+                    <div className="text-2xl font-bold text-blue-600 mb-2">{service.price}</div>
                     <CardDescription className="text-base">{service.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -437,7 +540,7 @@ const Index = () => {
               className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
               onClick={() => scrollToSection('contact')}
             >
-              Contact for Rates
+              Get Custom Quote
             </Button>
           </motion.div>
         </div>
