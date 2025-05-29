@@ -24,30 +24,36 @@ const Index = () => {
     document.documentElement.classList.toggle('dark', isDark);
   }, [isDark]);
 
-  // Track active section based on scroll position
+  // Enhanced scroll tracking for better section detection
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['about', 'skills', 'projects', 'services', 'contact'];
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 150; // Increased offset for better detection
 
-      for (const section of sections) {
+      // If we're at the very top, no section is active
+      if (window.scrollY < 200) {
+        setActiveSection('');
+        return;
+      }
+
+      // Find which section we're currently in
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
         const element = document.getElementById(section);
         if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          const { offsetTop } = element;
+          if (scrollPosition >= offsetTop) {
             setActiveSection(section);
             break;
           }
         }
       }
-
-      // If we're at the top, no section is active
-      if (window.scrollY < 100) {
-        setActiveSection('');
-      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -237,16 +243,16 @@ startxref
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className={`transition-colors capitalize relative ${
+                className={`transition-all duration-300 capitalize relative px-3 py-2 rounded-md ${
                   activeSection === item 
-                    ? 'text-foreground font-medium' 
-                    : 'text-foreground/80 hover:text-foreground'
+                    ? 'text-white bg-gradient-to-r from-blue-500 to-purple-600 font-semibold shadow-lg' 
+                    : 'text-foreground/80 hover:text-foreground hover:bg-muted/50'
                 }`}
               >
                 {item}
                 {activeSection === item && (
                   <motion.div
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-600"
+                    className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-white rounded-full"
                     layoutId="activeIndicator"
                     initial={false}
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
@@ -290,10 +296,10 @@ startxref
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className={`block w-full text-left transition-colors capitalize ${
+                  className={`block w-full text-left transition-all duration-300 capitalize px-3 py-2 rounded-md ${
                     activeSection === item 
-                      ? 'text-foreground font-medium' 
-                      : 'text-foreground/80 hover:text-foreground'
+                      ? 'text-white bg-gradient-to-r from-blue-500 to-purple-600 font-semibold' 
+                      : 'text-foreground/80 hover:text-foreground hover:bg-muted/50'
                   }`}
                 >
                   {item}
