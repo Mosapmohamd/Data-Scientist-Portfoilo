@@ -5,14 +5,14 @@ import { Text, Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 const skills = [
-  { name: 'Python', position: [2, 0, 0], color: '#3776ab' },
-  { name: 'TensorFlow', position: [-2, 0, 0], color: '#ff6f00' },
-  { name: 'PyTorch', position: [0, 2, 0], color: '#ee4c2c' },
-  { name: 'SQL', position: [0, -2, 0], color: '#336791' },
-  { name: 'AWS', position: [1.5, 1.5, 0], color: '#ff9900' },
-  { name: 'Docker', position: [-1.5, 1.5, 0], color: '#2496ed' },
-  { name: 'Jupyter', position: [1.5, -1.5, 0], color: '#f37626' },
-  { name: 'Pandas', position: [-1.5, -1.5, 0], color: '#150458' },
+  { name: 'Python', position: [2, 0, 0] as [number, number, number], color: '#3776ab' },
+  { name: 'TensorFlow', position: [-2, 0, 0] as [number, number, number], color: '#ff6f00' },
+  { name: 'PyTorch', position: [0, 2, 0] as [number, number, number], color: '#ee4c2c' },
+  { name: 'SQL', position: [0, -2, 0] as [number, number, number], color: '#336791' },
+  { name: 'AWS', position: [1.5, 1.5, 0] as [number, number, number], color: '#ff9900' },
+  { name: 'Docker', position: [-1.5, 1.5, 0] as [number, number, number], color: '#2496ed' },
+  { name: 'Jupyter', position: [1.5, -1.5, 0] as [number, number, number], color: '#f37626' },
+  { name: 'Pandas', position: [-1.5, -1.5, 0] as [number, number, number], color: '#150458' },
 ];
 
 const SkillOrb = ({ skill, index }: { skill: any; index: number }) => {
