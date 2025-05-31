@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Github, Linkedin, Mail, Download, ExternalLink, Menu, X, ChevronDown } from 'lucide-react';
@@ -91,23 +92,25 @@ endobj
 
 4 0 obj
 <<
-/Length 200
+/Length 250
 >>
 stream
 BT
 /F1 12 Tf
 50 700 Td
-(AI ENGINEER & DATA SCIENTIST) Tj
+(MOSAP ABDEL-GHANY - DATA SCIENTIST) Tj
 0 -20 Td
-(Email: contact@aienginer.com) Tj
+(Email: abdelghanymosap@gmail.com) Tj
 0 -20 Td
-(GitHub: github.com/profile) Tj
+(Phone: +201013089663) Tj
 0 -20 Td
-(LinkedIn: linkedin.com/in/profile) Tj
+(Location: Cairo, Egypt) Tj
 0 -40 Td
-(Passionate AI Engineer with 5+ years experience) Tj
+(Data Scientist and Python Instructor with experience) Tj
 0 -20 Td
-(in building intelligent systems and data insights.) Tj
+(in machine learning, data visualization, and AI.) Tj
+0 -20 Td
+(Currently training at Digital Egypt Pioneers Initiative.) Tj
 ET
 endstream
 endobj
@@ -127,14 +130,14 @@ xref
 0000000058 00000 n 
 0000000115 00000 n 
 0000000274 00000 n 
-0000000526 00000 n 
+0000000576 00000 n 
 trailer
 <<
 /Size 6
 /Root 1 0 R
 >>
 startxref
-593
+643
 %%EOF`;
 
     // Create and download the CV as a PDF file
@@ -142,7 +145,7 @@ startxref
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'AI_Engineer_CV.pdf';
+    link.download = 'Mosap_Abdel-Ghany_CV.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -153,60 +156,60 @@ startxref
 
   const skills = [
     { name: 'Python', level: 95, category: 'Programming' },
-    { name: 'TensorFlow/PyTorch', level: 90, category: 'AI/ML' },
-    { name: 'SQL/NoSQL', level: 88, category: 'Database' },
-    { name: 'Data Visualization', level: 92, category: 'Analytics' },
-    { name: 'AWS/GCP', level: 85, category: 'Cloud' },
-    { name: 'MLOps', level: 82, category: 'DevOps' }
+    { name: 'Machine Learning', level: 88, category: 'AI/ML' },
+    { name: 'Data Visualization', level: 90, category: 'Analytics' },
+    { name: 'Pandas/NumPy', level: 92, category: 'Data Tools' },
+    { name: 'Scikit-learn', level: 85, category: 'ML Libraries' },
+    { name: 'Streamlit', level: 80, category: 'Deployment' }
   ];
 
   const projects = [
     {
-      title: 'AI-Powered Customer Analytics',
-      description: 'Built an ML pipeline for real-time customer behavior analysis using NLP and computer vision.',
-      tech: ['Python', 'TensorFlow', 'AWS', 'React'],
+      title: 'Sentiment Analysis for TripAdvisor & Quora Egypt',
+      description: 'NLP project handling Arabic and English text using LSTM, BERT, and traditional ML models with interactive visualizations.',
+      tech: ['Python', 'BERT', 'LSTM', 'Plotly', 'Streamlit'],
       githubUrl: 'https://github.com',
       demoUrl: 'https://demo.com',
-      category: 'AI'
+      category: 'NLP'
     },
     {
-      title: 'Interactive Sales Dashboard',
-      description: 'Created dynamic Tableau dashboards with real-time data integration and predictive analytics.',
-      tech: ['Tableau', 'Python', 'SQL', 'D3.js'],
+      title: 'Disease Prediction System',
+      description: 'AI-powered voting system combining Decision Tree, Random Forest, and Naïve Bayes for medical diagnosis.',
+      tech: ['Python', 'Scikit-learn', 'Ensemble Learning', 'Machine Learning'],
       githubUrl: 'https://github.com',
       demoUrl: 'https://demo.com',
-      category: 'Data Viz'
+      category: 'ML'
     },
     {
-      title: 'LLM Chatbot Platform',
-      description: 'Developed a scalable chatbot using GPT-4 with custom fine-tuning for domain-specific tasks.',
-      tech: ['OpenAI API', 'FastAPI', 'React', 'Docker'],
+      title: 'Customer Churn Prediction',
+      description: 'Streamlit dashboard with 91% accuracy using Random Forest to predict customer churn and support retention decisions.',
+      tech: ['Python', 'Random Forest', 'Streamlit', 'Data Visualization'],
       githubUrl: 'https://github.com',
       demoUrl: 'https://demo.com',
-      category: 'AI'
+      category: 'ML'
     }
   ];
 
   const services = [
     {
-      title: 'AI Model Training',
-      description: 'Custom NLP, Computer Vision, and Machine Learning models tailored to your business needs.',
-      features: ['Data preprocessing', 'Model architecture design', 'Hyperparameter tuning', 'Performance optimization'],
-      price: '$2,500 - $15,000',
-      duration: '2-8 weeks'
+      title: 'Machine Learning Models',
+      description: 'Custom ML solutions for classification, regression, and predictive analytics tailored to your business needs.',
+      features: ['Data preprocessing', 'Model selection & training', 'Performance optimization', 'Deployment support'],
+      price: '$1,500 - $8,000',
+      duration: '2-6 weeks'
     },
     {
       title: 'Data Visualization',
-      description: 'Interactive dashboards and compelling visualizations that turn data into actionable insights.',
-      features: ['Dashboard development', 'Real-time analytics', 'Custom visualizations', 'Business intelligence'],
-      price: '$1,500 - $8,000',
-      duration: '1-4 weeks'
+      description: 'Interactive dashboards and compelling visualizations using Plotly, Matplotlib, and Streamlit.',
+      features: ['Dashboard development', 'Interactive visualizations', 'Custom charts & graphs', 'Real-time analytics'],
+      price: '$800 - $4,000',
+      duration: '1-3 weeks'
     },
     {
-      title: 'AI Consulting',
-      description: 'Strategic guidance on AI implementation, MLOps, and data-driven decision making.',
-      features: ['Proof of concepts', 'Technical architecture', 'Best practices', 'Team training'],
-      price: '$200 - $500/hour',
+      title: 'Python Training & Consulting',
+      description: 'Python instruction and data science consulting for teams and individuals.',
+      features: ['Python fundamentals', 'Data science libraries', 'ML algorithm training', 'Project mentoring'],
+      price: '$50 - $150/hour',
       duration: 'Flexible'
     }
   ];
@@ -235,7 +238,7 @@ startxref
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            AI Engineer
+            Mosap Abdel-Ghany
           </motion.div>
           
           <div className="hidden md:flex space-x-8">
@@ -323,9 +326,9 @@ startxref
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Building Intelligent
+            Data Scientist &
             <br />
-            Solutions with AI
+            Python Instructor
           </motion.h1>
           
           <motion.p 
@@ -334,7 +337,7 @@ startxref
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Transforming data into insights and building AI systems that drive innovation
+            Leveraging machine learning and data analysis to solve real-world problems and drive data-driven decisions
           </motion.p>
           
           <motion.div 
@@ -388,31 +391,34 @@ startxref
                 About Me
               </h2>
               <p className="text-lg text-foreground/80 mb-6 leading-relaxed">
-                I'm a passionate AI Engineer and Data Scientist with over 5 years of experience 
-                in building intelligent systems and extracting insights from complex datasets. 
-                My expertise spans machine learning, deep learning, and data visualization.
+                I'm Mosap Abdel-Ghany, a passionate Data Scientist and Python Instructor from Cairo, Egypt. 
+                Currently training at the Digital Egypt Pioneers Initiative, I specialize in machine learning, 
+                data analysis, and creating intelligent solutions for real-world problems.
               </p>
               <p className="text-lg text-foreground/80 mb-8 leading-relaxed">
-                I specialize in developing end-to-end AI solutions, from data preprocessing 
-                and model training to deployment and monitoring in production environments.
+                As a Python Instructor at TM Academy and AI/ML mentor at RTC, I enjoy sharing knowledge and 
+                helping others grow in the field of data science. My experience spans from sentiment analysis 
+                with NLP to predictive modeling for business applications.
               </p>
               
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
-                  <AnimatedCounter end={50} duration={2} />
+                  <AnimatedCounter end={15} duration={2} />
                   <p className="text-sm text-foreground/60 mt-1">Projects Completed</p>
                 </div>
                 <div className="text-center">
-                  <AnimatedCounter end={25} duration={2} />
-                  <p className="text-sm text-foreground/60 mt-1">Happy Clients</p>
+                  <AnimatedCounter end={100} duration={2} />
+                  <p className="text-sm text-foreground/60 mt-1">Students Taught</p>
                 </div>
               </div>
             </div>
             
             <div className="relative">
               <div className="w-80 h-80 mx-auto bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full flex items-center justify-center">
-                <div className="w-64 h-64 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-6xl font-bold">
-                  AI
+                <div className="w-64 h-64 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-4xl font-bold">
+                  DATA
+                  <br />
+                  SCIENCE
                 </div>
               </div>
             </div>
@@ -574,16 +580,16 @@ startxref
             >
               <h3 className="text-2xl font-semibold mb-6">Let's discuss your project</h3>
               <p className="text-foreground/80 mb-8">
-                Ready to transform your data into actionable insights? Let's collaborate on your next AI project.
+                Ready to transform your data into actionable insights? Let's collaborate on your next data science project.
               </p>
               
               <div className="space-y-4">
                 <a 
-                  href="mailto:contact@aienginer.com" 
+                  href="mailto:abdelghanymosap@gmail.com" 
                   className="flex items-center space-x-3 text-foreground/80 hover:text-foreground transition-colors"
                 >
                   <Mail className="h-5 w-5" />
-                  <span>contact@aienginer.com</span>
+                  <span>abdelghanymosap@gmail.com</span>
                 </a>
                 <a 
                   href="https://github.com" 
@@ -599,6 +605,14 @@ startxref
                   <Linkedin className="h-5 w-5" />
                   <span>LinkedIn Profile</span>
                 </a>
+                <div className="flex items-center space-x-3 text-foreground/80">
+                  <span className="text-lg">📱</span>
+                  <span>+201013089663</span>
+                </div>
+                <div className="flex items-center space-x-3 text-foreground/80">
+                  <span className="text-lg">📍</span>
+                  <span>Cairo, Egypt</span>
+                </div>
               </div>
             </motion.div>
             
@@ -645,7 +659,7 @@ startxref
       <footer className="py-8 px-4 border-t border-border">
         <div className="container mx-auto text-center">
           <p className="text-foreground/60">
-            © 2024 AI Engineer Portfolio. Built with React, Three.js, and ❤️
+            © 2024 Mosap Abdel-Ghany Portfolio. Built with React, Three.js, and ❤️
           </p>
         </div>
       </footer>
